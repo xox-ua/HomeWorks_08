@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">HomeWorks_06</string>
+
+    <string name="imgFlg">flg</string>
+    <string name="tvCapital">Capital city</string>
+    <string name="tvCountry">Counry name</string>
+    <string name="btnWiki">Wiki</string>
+    <string name="txtCapital">Столица:</string>
+    <string name="txtCountry">Страна:</string>
+</resources>
