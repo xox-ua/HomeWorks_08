@@ -27,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
     ImageView btnShake;
     ArrayAdapter<Country> ad;
     Country countryData[];
+    ArrayList<List<Country>> data;
+    List<Country> qqq;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,22 +38,30 @@ public class MainActivity extends AppCompatActivity {
         // фиксируем экран (запрет поворота)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        // получаем элемент ListView
         lv = (ListView) findViewById(R.id.lv);
+
         btnAdd = (ImageView) findViewById(R.id.btnAdd);
         btnDel = (ImageView) findViewById(R.id.btnDel);
         btnSort = (ImageView) findViewById(R.id.btnSort);
         btnShake = (ImageView) findViewById(R.id.btnShake);
 
-        countryData = ListData.initCountries();
+        //countryData = ListData.initCountries();
+        countryData = Arrays.asList(ListData.initCountries()).toArray(new Country[0]);
+        // создаем адаптер --- 1: context, 2: кастомный вид, 3: массив данных
         ad = new CountryAdapter(this, R.layout.list_item, countryData);
+        // устанавливаем адаптер
         lv.setAdapter(ad);
 
         // добавление нового item (из массива)
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<String> data = new ArrayList<>();
-                List<String> qqq = Arrays.asList(countryNames);
+                // создаём новый массив данных
+                data = new ArrayList<List<Country>>();
+                // трансформируем наш массив данных в список
+                qqq = Arrays.asList(countryData);
+
                 // случайное название страны из нашего массива
                 int idX = new Random().nextInt(countryNames.length);
                 // название случайно выбранной страны
@@ -61,16 +72,14 @@ public class MainActivity extends AppCompatActivity {
                 int randomFlg = flags[idX];
                 Log.wtf("randomName", String.valueOf(randomName));
                 Log.wtf("randomCapital", String.valueOf(randomCapital));
-                Log.wtf("randomFlg", String.valueOf(randomFlg));
+                int randomFlg1 = Log.wtf("randomFlg", String.valueOf(randomFlg));
 
-                data.add(randomName);
-                // создаем новый Map
-//                Map<String, Object> m = new HashMap<String, Object>();
-//                m.put(Arrays.toString(countryNames), randomName + " - NEW!");
-//                m.put(Arrays.toString(capitalNames), randomCapital);
-//                m.put(Arrays.toString(flags), randomFlg);
+
+                qqq.add(new Country(String.valueOf(randomName), String.valueOf(randomCapital), randomFlg));
+
+
                 // добавляем его в коллекцию
-                //ad.add(m);
+                data.add(qqq);
                 Log.wtf("mmmmm", String.valueOf(data));
                 // уведомляем, что данные изменились
                 ad.notifyDataSetChanged();
@@ -82,6 +91,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.wtf("DELETE", "clicked");
+                // получаем случайное число в диапазоне строк в списке
+                int count = lv.getCount();
+                if (count == 0) {
+                    Toast.makeText(getApplicationContext(),"No item for deleting", Toast.LENGTH_LONG).show();
+                } else {
+                    Random random = new Random();
+                    int pos = random.nextInt(count);
+                    // удаляем позицию равную числу выше
+                    data.remove(pos);
+                    // уведомляем, что данные изменились
+                    ad.notifyDataSetChanged();
+                }
             }
         });
 
