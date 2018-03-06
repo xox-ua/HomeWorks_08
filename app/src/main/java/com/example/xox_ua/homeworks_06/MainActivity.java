@@ -62,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
                 // трансформируем наш массив данных в список
                 qqq = new ArrayList<>(Arrays.asList(countryData));
 
+
+                
                 // случайное название страны из нашего массива
                 int idX = new Random().nextInt(countryNames.length);
                 // название случайно выбранной страны
