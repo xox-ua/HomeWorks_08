@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
         btnSort = (ImageView) findViewById(R.id.btnSort);
         btnShake = (ImageView) findViewById(R.id.btnShake);
 
-        //countryData = ListData.initCountries();
-        countryData = Arrays.asList(ListData.initCountries()).toArray(new Country[0]);
+        countryData = ListData.initCountries();
+        //countryData = Arrays.asList(ListData.initCountries()).toArray(new Country[0]);
         // создаем адаптер --- 1: context, 2: кастомный вид, 3: массив данных
         ad = new CountryAdapter(this, R.layout.list_item, countryData);
         // устанавливаем адаптер
@@ -58,9 +58,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // создаём новый массив данных
-                data = new ArrayList<List<Country>>();
+                data = new ArrayList<>();
                 // трансформируем наш массив данных в список
-                qqq = Arrays.asList(countryData);
+                qqq = new ArrayList<>(Arrays.asList(countryData));
 
                 // случайное название страны из нашего массива
                 int idX = new Random().nextInt(countryNames.length);
@@ -74,13 +74,10 @@ public class MainActivity extends AppCompatActivity {
                 Log.wtf("randomCapital", String.valueOf(randomCapital));
                 int randomFlg1 = Log.wtf("randomFlg", String.valueOf(randomFlg));
 
-
                 qqq.add(new Country(String.valueOf(randomName), String.valueOf(randomCapital), randomFlg));
-
-
                 // добавляем его в коллекцию
                 data.add(qqq);
-                Log.wtf("mmmmm", String.valueOf(data));
+                Log.wtf("DATA ======", String.valueOf(data));
                 // уведомляем, что данные изменились
                 ad.notifyDataSetChanged();
             }
@@ -135,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
         // нажатие на строку в ListView (item)
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
+            //@Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String mess = "Выбрана позиция: " + position;
                 Toast.makeText(getApplicationContext(), mess, Toast.LENGTH_SHORT).show();
