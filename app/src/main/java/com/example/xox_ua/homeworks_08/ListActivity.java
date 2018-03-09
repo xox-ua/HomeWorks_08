@@ -32,7 +32,6 @@ public class ListActivity extends BaseActivity {
     List<Country> qqq;
     String newD;
     String getD;
-    
 
 
     @Override
@@ -46,6 +45,39 @@ public class ListActivity extends BaseActivity {
         ad = new CountryAdapter(this, R.layout.list_item, countryData);
         // устанавливаем адаптер
         lv.setAdapter(ad);
+
+        // КНОПКА ДОБАВИТЬ - добавление нового item (из массива)
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // создаём новый массив данных
+                data = new ArrayList<>();
+                // трансформируем наш массив данных в список
+                qqq = new ArrayList<Country>(Arrays.asList(countryData));
+                Log.wtf("qqq", String.valueOf(qqq));
+                // случайное название страны из нашего массива
+                int idX = new Random().nextInt(countryNames.length);
+                // название случайно выбранной страны
+                String randomName = (countryNames[idX]);
+                // столица выбранной страны
+                String randomCapital = capitalNames[idX];
+                // флаг соответствующий выбранной стране
+                int randomFlg = flags[idX];
+                //int randomRate = rate[idX]
+
+                Log.wtf("randomName", String.valueOf(randomName));
+                Log.wtf("randomCapital", String.valueOf(randomCapital));
+
+
+                //qqq.add(new Country(String.valueOf(randomName), String.valueOf(randomCapital), randomFlg, randomRate));
+                // добавляем его в коллекцию
+                data.add(qqq);
+                Log.wtf("DATA ======", String.valueOf(data));
+                // уведомляем, что данные изменились
+                ad.notifyDataSetChanged();
+            }
+        });
+
 
         // КОРОТКОЕ НАЖАТИЕ на строку в ListView (item)
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -87,39 +119,35 @@ public class ListActivity extends BaseActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.wtf("LONG CLICK", "is clicked");
-                // удаляем выбранную позицию
-                data.remove(position);
-                // уведомляем, что данные изменились
-                ad.notifyDataSetChanged();
+//                // удаляем выбранную позицию
+//                dataAL.remove(position);
+//                // уведомляем, что данные изменились
+//                sAdapter.notifyDataSetChanged();
 
                 return false;
             }
         });
 
-        // прокрутка до конца списка после обновления ListView
-        lv.setTranscriptMode(ListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
 
-        // КНОПКА ДОБАВИТЬ - добавление нового item (из массива)
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AddActivity.class);
-                startActivityForResult(intent, 1975);
-            }
-        });
+
+        // прокрутка до конца списка после обновления ListView
+        //lv.setTranscriptMode(ListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
         switch (requestCode) {
             case 1975:
                 if (resultCode == RESULT_OK) {
+                    int newF = R.drawable.zz_flg_eu;
                     // получаем из intent
-                    String newCo = data.getStringExtra("AddCountry");
-                    String newCi = data.getStringExtra("AddCity");
-                    int newR = data.getIntExtra("AddRating", 0);
-                    newD = data.getStringExtra("AddDescr");
+                    String newCo = intent.getStringExtra("AddCountry");
+                    String newCi = intent.getStringExtra("AddCity");
+                    int newR = intent.getIntExtra("AddRating", 0);
+                    newD = intent.getStringExtra("AddDescr");
+
+                    //data.add(new ArrayList<Country>(newCo, newCi, newF, newR));
                     // создаем новый Map
 //                    m = new HashMap<String, Object>();
 //                    m.put(bIMAGE, R.drawable.zz_flg_eu);
