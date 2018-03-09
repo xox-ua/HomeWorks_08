@@ -32,6 +32,7 @@ public class ListActivity extends BaseActivity {
     List<Country> qqq;
     String newD;
     String getD;
+    
 
 
     @Override
