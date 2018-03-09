@@ -1,54 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.xox_ua.homeworks_06.MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/hw_022"
+    tools:context="com.example.xox_ua.homeworks_08.MainActivity">
 
-    <ListView
-        android:id="@+id/lv"
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/logo"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"/>
+
+    <EditText
+        android:id="@+id/etLogin"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" >
-    </ListView>
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:textSize="24sp"
+        android:inputType="text"
+        android:textColorHint="@color/colorGrey"
+        android:hint="@string/hint_login" />
+
+    <EditText
+        android:id="@+id/etPass"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:textSize="24sp"
+        android:inputType="numberPassword"
+        android:textColorHint="@color/colorGrey"
+        android:hint="@string/hint_pass"/>
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/btn_login"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="10"
-        android:background="@drawable/border_linear_layout"
         android:orientation="horizontal"
-        android:gravity="center">
-        <ImageView
-            android:id="@+id/btnAdd"
+        android:gravity="bottom|center"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/tvSignup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_add"
-            android:layout_margin="5dp"
-            tools:ignore="ContentDescription" />
-        <ImageView
-            android:id="@+id/btnDel"
+            android:text="@string/tv_signup"
+            android:textSize="12sp"
+            android:textColor="@color/colorGreyLight"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:id="@+id/tvForget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_delete"
-            android:layout_margin="5dp"
-            tools:ignore="ContentDescription" />
-        <ImageView
-            android:id="@+id/btnSort"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_sort"
-            android:layout_margin="5dp"
-            tools:ignore="ContentDescription" />
-        <ImageView
-            android:id="@+id/btnShake"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_unsort"
-            android:layout_margin="5dp"
-            tools:ignore="ContentDescription" />
+            android:text="@string/tv_forget"
+            android:textSize="12sp"
+            android:textColor="@color/colorGreyLight"
+            android:layout_marginLeft="10dp"/>
+
     </LinearLayout>
 
 

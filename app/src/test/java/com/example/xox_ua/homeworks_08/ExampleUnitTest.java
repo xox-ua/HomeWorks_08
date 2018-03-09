@@ -1,4 +1,4 @@
-package com.example.xox_ua.homeworks_06;
+package com.example.xox_ua.homeworks_08;
 
 import org.junit.Test;
 

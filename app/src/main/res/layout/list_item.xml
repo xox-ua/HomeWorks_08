@@ -4,43 +4,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:longClickable="true">
 
     <ImageView
-        android:id="@+id/ivFlag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/zz_flg_eu"
-        android:layout_gravity="center"/>
+        android:id="@+id/ivFlg"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_launcher_background" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center_vertical"
         android:layout_weight="1"
-        android:layout_marginLeft="10dp">
+        android:paddingLeft="10dp">
+
         <TextView
             android:id="@+id/tvCountry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tvCountry"/>
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="@string/tv_country"
+            android:layout_weight="1"/>
 
         <TextView
             android:id="@+id/tvCapital"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="@string/tv_city"
+            android:layout_weight="1"/>
+
+        <RatingBar
+            android:id="@+id/ratingBar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tvCapital"/>
-
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginBottom="10dp"
+            style="?android:attr/ratingBarStyleSmall"
+            android:numStars="5"
+            android:isIndicator="true"/>
     </LinearLayout>
-
-    <Button
-        android:id="@+id/bWiki"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:focusable="false"
-        android:gravity="center"
-        android:text="@string/btnWiki"
-        android:layout_weight="0" />
 
 </LinearLayout>
