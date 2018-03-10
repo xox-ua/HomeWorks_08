@@ -27,13 +27,12 @@ import static com.example.xox_ua.homeworks_08.ListData.flags;
 public class ListActivity extends BaseActivity {
     @BindView(R.id.lv) ListView lv;
     @BindView(R.id.btnAdd) ImageView btnAdd;
-    Country countryData[];          // источник данных
+    Country[] countryData;          // источник данных
     ArrayAdapter<Country> ad;       // адаптер
-
-    ArrayList<Country> data = new ArrayList<>();  // непонятная хуйня
-
     String newD;
     String getD;
+
+    //ArrayList<Country> data = new ArrayList<>();  // непонятная хуйня
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +43,7 @@ public class ListActivity extends BaseActivity {
         // ListData.initCountries() - метод создания объекта с массивами в классе ListData
         countryData = ListData.initCountries();
         // Создаем адаптер для преобразования массива в представления (array to views)
-        // 1: контекст, 2: идентификатор ресурса с разметкой для каждой строки, 3: массив строк (данных)
+        // 1: контекст, 2: идентификатор ресурса с разметкой для каждой строки, 3: массив данных
         ad = new CountryAdapter(this, R.layout.list_item, countryData);
         // устанавливаем адаптер для ListView
         lv.setAdapter(ad);
@@ -144,10 +143,18 @@ public class ListActivity extends BaseActivity {
 //!!!! ковырять
                     // всю мешпуху в один обект и в список с которым работает адаптер
                     // у меня ArrayAdapter
-                    data.add(new Country(newCo, newCi, newF, newR));
+                    //data.add(new Country(newCo, newCi, newF, newR));
+
+                    // создаём новый массив данных
+                    ArrayList<List<Country>> data = new ArrayList<>();
+                    // трансформируем наш массив данных в список
+                    List<Country> qqq = new ArrayList<>(Arrays.asList(countryData));
+                    qqq.add(new Country(String.valueOf(newCo), String.valueOf(newCi), newF, newR));
+                    data.add(qqq);
 
 
-                    //data.add(new ArrayList<Country>(newCo, newCi, newF, newR));   // не работает => cannot resolve constructor
+                    //data.add(new ArrayList<Country>(newCo, newCi, newF, newR));       // не работает => cannot resolve constructor
+                    //data.add(new ArrayAdapter<Country>(newCo, newCi, newF, newR));    // не работает => cannot resolve constructor
 
                     // уведомляем, что данные изменились
                     ad.notifyDataSetChanged();
