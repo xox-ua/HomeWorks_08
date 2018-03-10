@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import java.util.Random;
 
+//определяем адаптер
+// ArrayAdapter<Xxx> - Xxx тип данных, которые должен отображать адаптер
 public class CountryAdapter extends ArrayAdapter<Country> {
     Context context;
     Country countries[];
@@ -28,8 +30,12 @@ public class CountryAdapter extends ArrayAdapter<Country> {
 
     @NonNull
     @Override
+    // в методе getView описываем процесс преобразования объектов в представление
+    // getView () - это метод, который возвращает фактическое представление, используемое как строка в ListView в определенной позиции.
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View rootView = null;
+        // проверяем, представление (convertView) новое или повторно созданное
+        // если не используется (равно null), заполняем представление (inflate View) данными
         if(convertView == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             rootView = inflater.inflate(R.layout.list_item, parent, false);
@@ -37,6 +43,8 @@ public class CountryAdapter extends ArrayAdapter<Country> {
             rootView = convertView;
         }
 
+        // определяем вьюхи для отображения данных
+        // заполняем вьюхи соответствующими объектами данных
         ImageView ivFlg = (ImageView) rootView.findViewById(R.id.ivFlg);
         ivFlg.setImageResource(countries[position].flagId);
 
@@ -49,6 +57,7 @@ public class CountryAdapter extends ArrayAdapter<Country> {
         RatingBar ratingBar = (RatingBar) rootView.findViewById(R.id.ratingBar);
         ratingBar.setRating(countries[position].ratingBar);
 
+        // возвращаем заполненный вид (View rootView) для визуализации на экране
         return rootView;
     }
 }
