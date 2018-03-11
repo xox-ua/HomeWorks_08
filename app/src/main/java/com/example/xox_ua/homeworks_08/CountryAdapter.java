@@ -14,15 +14,18 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 //определяем адаптер
 // ArrayAdapter<Xxx> - Xxx тип данных, которые должен отображать адаптер
 public class CountryAdapter extends ArrayAdapter<Country> {
     Context context;
-    Country countries[];
+    List<Country> countries = new ArrayList<>();
 
-    public CountryAdapter(@NonNull Context context, int resource, Country[] countries) {
+    // конструктор кастомного адаптера
+    public CountryAdapter(@NonNull Context context, int resource, List<Country> countries) {
         super(context, resource, countries);
         this.context = context;
         this.countries = countries;
@@ -46,16 +49,16 @@ public class CountryAdapter extends ArrayAdapter<Country> {
         // определяем вьюхи для отображения данных
         // заполняем вьюхи соответствующими объектами данных
         ImageView ivFlg = (ImageView) rootView.findViewById(R.id.ivFlg);
-        ivFlg.setImageResource(countries[position].flagId);
+        ivFlg.setImageResource(countries.get(position).flagId);
 
         TextView tvCountry = (TextView) rootView.findViewById(R.id.tvCountry);
-        tvCountry.setText(String.format("%s %s", context.getString(R.string.tv_country), countries[position].countryName));
+        tvCountry.setText(String.format("%s %s", context.getString(R.string.tv_country), countries.get(position).countryName));
 
         TextView tvCapital = (TextView) rootView.findViewById(R.id.tvCapital);
-        tvCapital.setText(String.format("%s %s", context.getString(R.string.tv_city), countries[position].capitalName));
+        tvCapital.setText(String.format("%s %s", context.getString(R.string.tv_city), countries.get(position).capitalName));
 
         RatingBar ratingBar = (RatingBar) rootView.findViewById(R.id.ratingBar);
-        ratingBar.setRating(countries[position].ratingBar);
+        ratingBar.setRating(countries.get(position).ratingBar);
 
         // возвращаем заполненный вид (View rootView) для визуализации на экране
         return rootView;

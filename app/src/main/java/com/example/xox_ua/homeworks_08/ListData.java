@@ -1,5 +1,7 @@
 package com.example.xox_ua.homeworks_08;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 class ListData {
@@ -23,7 +25,7 @@ class ListData {
             R.drawable.zz_flg_prt, R.drawable.zz_flg_rou, R.drawable.zz_flg_smr, R.drawable.zz_flg_svk, R.drawable.zz_flg_svn,
             R.drawable.zz_flg_ukr, R.drawable.zz_flg_vat };
 
-    static Country[] initCountries(){
+    static List<Country> initCountries(){
         // создаём массив случайных чисел для рейтинга
         Random random = new Random();
         int ratingBar[] = new int[countryNames.length];
@@ -32,9 +34,9 @@ class ListData {
         }
 
         // наполняем массив данными (страны, столицы, флаги, рейтинги)
-        Country countries[] = new Country[countryNames.length];
+        List<Country> countries = new ArrayList<>();
         for(int i = 0; i < countryNames.length; i++)
-            countries[i] = new Country(countryNames[i], capitalNames[i], flags[i], ratingBar[i]);
+            countries.add(new Country(countryNames[i], capitalNames[i], flags[i], ratingBar[i]));
 
         return countries;
     }
