@@ -3,31 +3,22 @@ package com.example.xox_ua.homeworks_08;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.Movie;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.RequestCreator;
+import com.example.xox_ua.homeworks_08.Base.BaseActivity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
+
 import butterknife.BindView;
-import static com.example.xox_ua.homeworks_08.ListData.capitalNames;
-import static com.example.xox_ua.homeworks_08.ListData.countryNames;
-import static com.example.xox_ua.homeworks_08.ListData.flags;
 
 public class ListActivity extends BaseActivity {
     @BindView(R.id.lv) ListView lv;
@@ -43,7 +34,7 @@ public class ListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         // Строим источник данных
-        countriesData = ListData.initCountries();
+        countriesData = mDataManager.fetchMocks();
         // Создаем адаптер для преобразования массива в представления (array to views)
         // 1: контекст, 2: идентификатор ресурса с разметкой для каждой строки, 3: массив данных
         ad = new CountryAdapter(this, R.layout.list_item, countriesData);

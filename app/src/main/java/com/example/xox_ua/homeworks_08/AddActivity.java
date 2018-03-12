@@ -2,12 +2,12 @@ package com.example.xox_ua.homeworks_08;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RatingBar;
+
+import com.example.xox_ua.homeworks_08.Base.BaseActivity;
 
 import butterknife.BindView;
 
