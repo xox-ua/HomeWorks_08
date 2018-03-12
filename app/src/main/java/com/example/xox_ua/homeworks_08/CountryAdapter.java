@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -48,8 +50,14 @@ public class CountryAdapter extends ArrayAdapter<Country> {
 
         // определяем вьюхи для отображения данных
         // заполняем вьюхи соответствующими объектами данных
-        ImageView ivFlg = (ImageView) rootView.findViewById(R.id.ivFlg);
-        ivFlg.setImageResource(countries.get(position).flagId);
+        //ImageView ivFlg = (ImageView) rootView.findViewById(R.id.ivFlg);
+        //ivFlg.setImageResource(countries.get(position).flagId);
+
+        Picasso.get()
+                .load(countries.get(position).flagId)
+                .placeholder(R.drawable.zz_image_loading)
+                .error(R.drawable.zz_image_error_loading)
+                .into((ImageView) rootView.findViewById(R.id.ivFlg));
 
         TextView tvCountry = (TextView) rootView.findViewById(R.id.tvCountry);
         tvCountry.setText(String.format("%s %s", context.getString(R.string.tv_country), countries.get(position).countryName));

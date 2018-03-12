@@ -1,6 +1,7 @@
 package com.example.xox_ua.homeworks_08;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Movie;
 import android.os.Bundle;
@@ -14,6 +15,10 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -29,8 +34,8 @@ public class ListActivity extends BaseActivity {
     @BindView(R.id.btnAdd) ImageView btnAdd;
     ArrayAdapter<Country> ad;                           // адаптер
     List<Country> countriesData = new ArrayList<>();    // источник данных
-    String newD;
     String getD;
+    public static final String DESCR = "Description";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,16 +77,16 @@ public class ListActivity extends BaseActivity {
                 String getCo = txtView1.getText().toString();   // берём текст из вьюхи страны
                 String getCC = txtView2.getText().toString();   // берём текст из вьюхи столицы
                 int getR = (int) ratingBar.getRating();         // берём цифру из вьюхи рейтинга
-
-                if (newD == null) {
+                // считываем сохранённое Описание
+                SharedPreferences prefs = getSharedPreferences(DESCR, MODE_PRIVATE);
+                String restoredText = prefs.getString("text", null);
+                if (restoredText == null & !getCo.contains(" - NEW!")) {
                     // если описание отсутствует показываем рыбу
                     getD = getResources().getString(R.string.lorem);
-                    Log.wtf("newD", "== null");
-                } else if (getCo.contains("NEW!")){
+                } else if (getCo.contains(" - NEW!")){
                     // если это введённое пользователем описание (в AddActivity),
                     // то передаём описание из пришедшего интента
-                    getD = newD;
-                    Log.wtf("newD", "NEW!");
+                    getD = prefs.getString("newD", "No name defined");
                 }
                 // передаём данные с помощью бандла и интента
                 Bundle extras = new Bundle();
@@ -119,12 +124,18 @@ public class ListActivity extends BaseActivity {
             case 1975:
                 if (resultCode == RESULT_OK) {
                     // получаем интент из AddActivity
-                    String newCo = intent.getStringExtra("AddCountry");
+                    String newCountry = intent.getStringExtra("AddCountry");
+                    String newCo = newCountry + " - NEW!";
                     String newCi = intent.getStringExtra("AddCity");
                     int newR = intent.getIntExtra("AddRating", 0);
-                    newD = intent.getStringExtra("AddDescr");
+                    String newD = intent.getStringExtra("AddDescr");
+                    // сохраняем полученный Description
+                    SharedPreferences.Editor editor = getSharedPreferences(DESCR, MODE_PRIVATE).edit();
+                    editor.putString("newD", newD);
+                    editor.apply();
                     // задаём общую картинку для всех новодобавленных строк
                     int newF = R.drawable.zz_flg_eu;
+
                     // пришедший интент добавляем в коллекцию
                     // всю мешпуху в один обект и в список с которым работает адаптер
                     countriesData.add(new Country(newCo, newCi, newF, newR));
