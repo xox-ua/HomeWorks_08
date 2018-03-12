@@ -54,19 +54,19 @@ public class CountryAdapter extends ArrayAdapter<Country> {
         //ivFlg.setImageResource(countries.get(position).flagId);
 
         Picasso.get()
-                .load(countries.get(position).flagId)
+                .load(countries.get(position).getFlagId())
                 .placeholder(R.drawable.zz_image_loading)
                 .error(R.drawable.zz_image_error_loading)
                 .into((ImageView) rootView.findViewById(R.id.ivFlg));
 
         TextView tvCountry = (TextView) rootView.findViewById(R.id.tvCountry);
-        tvCountry.setText(String.format("%s %s", context.getString(R.string.tv_country), countries.get(position).countryName));
+        tvCountry.setText(String.format("%s %s", context.getString(R.string.tv_country), countries.get(position).getCountryName()));
 
         TextView tvCapital = (TextView) rootView.findViewById(R.id.tvCapital);
-        tvCapital.setText(String.format("%s %s", context.getString(R.string.tv_city), countries.get(position).capitalName));
+        tvCapital.setText(String.format("%s %s", context.getString(R.string.tv_city), countries.get(position).getCapitalName()));
 
         RatingBar ratingBar = (RatingBar) rootView.findViewById(R.id.ratingBar);
-        ratingBar.setRating(countries.get(position).ratingBar);
+        ratingBar.setRating(countries.get(position).getRatingBar());
 
         // возвращаем заполненный вид (View rootView) для визуализации на экране
         return rootView;
